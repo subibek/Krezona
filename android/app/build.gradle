@@ -30,11 +30,21 @@ android {
         versionCode = flutter.versionCode
         versionName = flutter.versionName
     }
+    signingConfigs {
+        release {
+            keyAlias 'my-key-alias'
+            keyPassword 'ramos15'
+            storeFile file ('C:/Users/subib/OneDrive/Desktop/Krezona/gtask/my-release-key.jks')          
+            storePassword 'ramos15'
+        }
+    }
 
     buildTypes {
     release {
-        minifyEnabled true // Enable R8 for release builds
-        proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        signingConfig signingConfigs.release
+        minifyEnabled false // Enable R8 for release builds
+        shrinkResources false
+        //proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
     }
     debug {
         minifyEnabled false // Disable R8 for debug builds
