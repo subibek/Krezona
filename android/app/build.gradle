@@ -1,0 +1,62 @@
+plugins {
+    id "com.android.application"
+    id "kotlin-android"
+    // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
+    id "dev.flutter.flutter-gradle-plugin"
+}
+
+android {
+    namespace = "com.example.gtask"
+    compileSdk = flutter.compileSdkVersion
+    ndkVersion = flutter.ndkVersion
+
+    packagingOptions {
+        pickFirst '**/libc++_shared.so'
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8
+    }
+
+    defaultConfig {
+        applicationId = "com.example.gtask"
+        minSdk = 24
+        targetSdk = 33
+        versionCode = flutter.versionCode
+        versionName = flutter.versionName
+    }
+
+    buildTypes {
+    release {
+        minifyEnabled true // Enable R8 for release builds
+        proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+    }
+    debug {
+        minifyEnabled false // Disable R8 for debug builds
+    }
+}
+
+     sourceSets {
+        main {
+            jniLibs.srcDirs = ['src/main/jniLibs']
+        }
+    }
+}
+
+dependencies {
+    // Add the Zoom Video SDK dependency here
+    implementation "us.zoom.videosdk:zoomvideosdk-core:1.12.10"
+    implementation 'com.android.support:multidex:1.0.3'
+    implementation 'androidx.multidex:multidex:2.0.1'
+    implementation 'com.google.errorprone:error_prone_annotations:2.10.0'
+    implementation 'javax.annotation:javax.annotation-api:1.3.2' 
+}
+
+flutter {
+    source = "../.."
+}
